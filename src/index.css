@@ -1,0 +1,20 @@
+:root {
+  --theme-white: #ffffff;
+  --theme-light-grey: #f4f4f6; /* Backgrounds */
+  --theme-mid-grey: #e0e0e5;   /* Borders */
+  --theme-dark-grey: #333336;  /* Text */
+  --theme-accent-grey: #66666e; /* Subtitles */
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--theme-dark-grey);
+  background-color: var(--theme-white);
+}
+
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Important for the scrolling effect */
+}
