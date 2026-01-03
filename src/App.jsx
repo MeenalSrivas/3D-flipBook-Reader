@@ -4,13 +4,16 @@ import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { FiPlus, FiUser, FiX, FiLogOut } from 'react-icons/fi'; // Added Logout Icon
 import Library from './components/Library';
-
+import NavbarWrapper from './components/NabarWrapper';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'; 
+import BookReader from './components/BookReader';
 
 function App() {
   const [session, setSession] = useState(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
-
+  const [selectedBook, setSelectedBook] = useState(null)
+  
   useEffect(() => {
     // 1. App load hote hi check karein ki user pehle se login hai ya nahi
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -46,38 +49,21 @@ function App() {
   };
 
   return (
+    <Router>
     <div className="app-container">
       {/* --- Navigation Bar --- */}
-      <nav className="navbar">
-        <button className="nav-icon-btn left" onClick={handlePlusClick} title="Upload Book">
-          <FiPlus size={24} color="var(--theme-dark-grey)"/>
-        </button>
-        
-        <div className="nav-right-group">
-          {!session ? (
-             <button className="nav-btn" onClick={() => setShowAuthModal(true)}>
-               Sign In / Sign Up
-             </button>
-          ) : (
-             <>
-               <button className="nav-icon-btn" onClick={handleLogout} title="Logout">
-                  <FiLogOut size={22} color="var(--theme-dark-grey)"/>
-               </button>
-               <button className="nav-icon-btn" title="My Profile">
-                  <FiUser size={24} color="var(--theme-dark-grey)"/>
-               </button>
-             </>
-          )}
-        </div>
-      </nav>
+      <NavbarWrapper 
+          session={session} 
+          handleLogout={handleLogout} 
+          
+        />  
 
       {/* --- Main 3-Column Layout --- */}
       <main className="main-layout">
-       
-        
-        
-        {/* Column 2: Center Content (Hero Section) */}
-        <section className="center-content">
+        <Routes>
+          <Route 
+          path='/'
+          element={<section className="center-content">
   {!session ? (
     /* Logged Out View (Puraana wala) */
     <div className="hero-text-box">
@@ -89,11 +75,15 @@ function App() {
     </div>
   ) : (
     /* Logged In View (Naya Library Component) */
-    <Library session={session} />
+    <Library session={session} onSelectBook={(book) => setSelectedBook(book)} />
   )}
-</section>
+</section>}
+          
+          />
+
+          <Route path="/reader/:bookId" element={<BookReader book={selectedBook} onback={()=> Navigate('/')} />} />
+        </Routes>
         
-       
         
       </main>
 
@@ -125,6 +115,7 @@ function App() {
         </div>
       )}
     </div>
+    </Router>
   );
 }
 

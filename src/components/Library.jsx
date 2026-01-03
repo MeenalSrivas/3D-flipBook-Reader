@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { FiUploadCloud, FiBookOpen } from 'react-icons/fi';
+import BookReader from './BookReader';
+import { useNavigate } from 'react-router-dom';
 
-const Library = ({ session }) => {
+const Library = ({ session, onSelectBook}) => {
+  const navigate = useNavigate();
   const [books, setBooks] = useState([]);
   const [uploading, setUploading] = useState(false);
-
+  const [selectedBook, setSelectedBook] = useState(null);
   // 1. Pehle se uploaded books fetch karna
   useEffect(() => {
     fetchBooks();
@@ -59,6 +62,13 @@ const Library = ({ session }) => {
       setUploading(false);
     }
   };
+  const handleReadNow = (book, bookId) => {
+    if (onSelectBook) {
+      onSelectBook(book)
+    }
+    // Ye user ko naye page par le jayega
+    navigate(`/reader/${bookId}`);
+  };
 
   return (
     <div className="library-container">
@@ -83,12 +93,13 @@ const Library = ({ session }) => {
             <div key={book.id} className="book-item">
               <div className="book-icon"><FiBookOpen size={40} /></div>
               <p className="book-title">{book.title}</p>
-              <button className="read-btn">Read Now</button>
+              <button className="read-btn" onClick={() => handleReadNow(book, book.id)}>Read Now</button>
             </div>
           ))
         ) : (
           <p className="empty-msg">No novels uploaded yet. Your first book will appear here!</p>
         )}
+        
       </div>
     </div>
   );
