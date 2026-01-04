@@ -1,97 +1,251 @@
-/* The main container for the 3-column layout */
-.main-layout {
-    display: grid;
-    /* Left border fixed, Center flexible, Right border fixed */
-    grid-template-columns: 280px 1fr 280px;
-    height: 100vh;
-    width: 100vw;
+/* --- 1. THEME VARIABLES --- */
+:root {
+  --bg-cream: #FDFBF7;             /* Main Page Background */
+  --primary-orange: #B46E2F;       /* Terracotta Button Color */
+  --orange-light: #E8D8C4;         /* For Highlights/Underlines */
+  --text-dark: #2D241E;            /* Warm Dark Brown for Text */
+  --text-muted: #6D6763;
+  --white: #FFFFFF;
+  --border-warm: #F0EADF;
+  --font-serif: 'Playfair Display', serif; /* Headings */
+  --font-sans: 'Inter', sans-serif;       /* Body */
 }
 
-/* Navbar sitting on top */
+/* --- 2. BASE STYLES --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+}
+
+/* --- 3. LAYOUT (.app-container & .main-layout) --- */
+/* --- 1. NAVBAR CONTAINER --- */
 .navbar {
     position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 60px;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px; /* Thodi zyada height premium look deti hai */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Elements ko dono kinaron par dhakelta hai */
     align-items: center;
-    padding: 0 30px;
-    z-index: 10; /* Ensure it's above the scrolling borders */
-    /* Optional: slight background so scrolling pages don't clash with icons */
-    background: linear-gradient(to bottom, var(--theme-white) 50%, transparent);
+    padding: 0 50px; /* Side padding for breathing space */
+    background: rgba(253, 251, 247, 0.9); /* Semi-transparent cream */
+    backdrop-filter: blur(10px); /* Modern frosted glass effect */
+    border-bottom: 1px solid var(--border-warm);
+    z-index: 1000;
+    transition: var(--transition);
 }
 
-.nav-icon-btn, .nav-btn {
-    background: none; border: none; cursor: pointer; padding: 8px;
-}
-.nav-btn {
-    font-weight: 600; color: var(--theme-dark-grey);
-    border: 1px solid var(--theme-mid-grey);
-    padding: 8px 16px; border-radius: 4px;
-    background: var(--theme-white);
-}
-
-
-/* Center Hero Section */
-.center-content {
-  grid-column: 2;
+/* --- 2. LEFT SECTION (Logo & Plus Button) --- */
+.nav-left {
     display: flex;
+    align-items: center;
+    gap: 20px; /* Plus aur Logo ke beech ki jagah */
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-logo h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+/* Logo ka icon (agar aap use kar rahe hain) */
+.logo-icon {
+    background-color: var(--primary-orange);
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
     justify-content: center;
+}
+
+/* --- 3. RIGHT SECTION (Logout & Profile) --- */
+.nav-right-group {
+    display: flex;
+    align-items: right;
+    gap: 12px; /* Icons ke beech ki spacing */
+}
+
+/* --- 4. ICON BUTTONS STYLING --- */
+.nav-icon-btn {
+    background: var(--white);
+    border: 1px solid var(--border-warm);
+    color: var(--text-dark);
+    width: 42px;
+    height: 42px;
+    border-radius: 12px; /* Matching your landing page card radius */
+    display: flex;
     align-items: center;
-    text-align: center;
-    background-color: var(--theme-white);
-    z-index: 5; /* Sit above the borders */
-    box-shadow: 0 0 30px rgba(0,0,0,0.05); /* Pop out slightly */
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 2px 8px rgba(45, 36, 30, 0.05);
+}
+
+.nav-icon-btn:hover {
+    background-color: var(--primary-orange);
+    color: var(--white);
+    border-color: var(--primary-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(180, 110, 47, 0.2);
+}
+
+/* Plus button ko thoda highlight karne ke liye */
+.nav-icon-btn.left {
+    background-color: var(--orange-light);
+    color: var(--primary-orange);
+    border: none;
+}
+
+/* --- 5. SIGN IN BUTTON --- */
+.nav-btn {
+    background-color: var(--primary-orange);
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.nav-btn:hover {
+    background-color: #965a25;
+    box-shadow: 0 4px 15px rgba(180, 110, 47, 0.3);
+}
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-layout {
+  display: grid;
+  /* 3-Column setup: Sidebars are empty for now, Content is in the center */
+  grid-template-columns: 280px 1fr 280px;
+  min-height: calc(100vh - 80px); /* Adjust for Navbar height */
+  margin-top: 80px;
+}
+
+/* --- 4. CENTER CONTENT (.center-content) --- */
+.center-content {
+  grid-column: 2; /* Content stays in the middle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color: var(--bg-cream);
+}
+
+/* --- 5. HERO SECTION (.hero-text-box) --- */
+.hero-text-box {
+  max-width: 600px;
+  text-align: center;
 }
 
 .hero-text-box h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: var(--text-dark);
 }
 
 .hero-text-box p {
-    font-size: 1.125rem;
-    color: var(--theme-accent-grey);
-    max-width: 500px;
-    margin: 0 auto 2rem auto;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 30px;
 }
 
+/* --- 6. BUTTONS (.cta-button) --- */
 .cta-button {
-    padding: 12px 24px;
-    background-color: var(--theme-dark-grey);
-    color: var(--theme-white);
-    border: none;
-    font-weight: 600;
-    font-size: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  background-color: var(--primary-orange);
+  color: var(--white);
+  padding: 14px 32px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(180, 110, 47, 0.2);
 }
-.cta-button:hover { background-color: #000; }
 
+.cta-button:hover {
+  background-color: #965a25; /* Darker terracotta */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(180, 110, 47, 0.3);
+}
 
-/* Auth Modal Styling */
+/* --- 7. AUTH MODAL (.auth-modal-overlay & .auth-modal-content) --- */
 .auth-modal-overlay {
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(255,255,255,0.8);
-    backdrop-filter: blur(5px);
-    z-index: 50;
-    display: flex; justify-content: center; align-items: center;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(45, 36, 30, 0.4); /* Brownish overlay */
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
 }
+
 .auth-modal-content {
-    background: var(--theme-white);
-    padding: 40px;
-    width: 100%; max-width: 400px;
-    border-radius: 8px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-    position: relative;
-    border: 1px solid var(--theme-mid-grey);
+  background: var(--white);
+  padding: 40px;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 24px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-warm);
 }
+
 .close-modal {
-    position: absolute; top: 15px; right: 15px;
-    background: none; border: none; cursor: pointer; color: var(--theme-accent-grey);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--bg-cream);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.close-modal:hover {
+  background-color: var(--orange-light);
+  color: var(--primary-orange);
+}
+
+/* Supabase Auth UI Styling adjustment to match theme */
+.auth-modal-content h2 {
+  font-family: var(--font-serif);
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 /* Supabase Auth UI Overrides (to match grey theme) */
@@ -104,211 +258,288 @@
     border: 1px solid var(--theme-mid-grey) !important;
 }
 
+/* --- 1. LIBRARY CONTAINER --- */
 .library-container {
     width: 100%;
-    max-width: 900px;
-    padding: 40px;
-    text-align: center;
+    max-width: 1000px; /* Center layout mein focus maintain karne ke liye */
+    margin: 0 auto;
+    padding: 20px 40px 60px 40px;
     display: flex;
     flex-direction: column;
-    align-items:center
+    align-items: center;
+}
+
+/* --- 2. HEADER SECTION --- */
+.library-header {
+    text-align: center;
+    margin-bottom: 50px;
+    max-width: 700px;
 }
 
 .library-header h1 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: var(--theme-dark-grey);
-    
-    
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    line-height: 1.3;
+    color: var(--text-dark);
+    margin-bottom: 25px;
 }
 
+/* Upload Button - Match landing page CTA style */
 .upload-btn {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    background: var(--theme-dark-grey);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 4px;
+    gap: 12px;
+    background-color: var(--primary-orange);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 12px;
     cursor: pointer;
     font-weight: 600;
-    margin-bottom: 40px;
+    font-size: 1rem;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(180, 110, 47, 0.2);
 }
 
+.upload-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(180, 110, 47, 0.3);
+    background-color: #965a25;
+}
+
+/* --- 3. BOOKS GRID --- */
 .books-grid {
     display: grid;
-    
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 25px;
+    /* Responsive columns jo center mein align rahengi */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 35px;
+    width: 100%;
     margin-top: 20px;
-
 }
 
+/* --- 4. INDIVIDUAL BOOK CARD (.book-item) --- */
 .book-item {
-    background: var(--theme-light-grey);
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid var(--theme-mid-grey);
+    background: var(--white);
+    padding: 30px 20px;
+    border-radius: 20px; /* Premium smooth corners */
+    border: 1px solid var(--border-warm);
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.2s;
+    transition: var(--transition);
+    box-shadow: var(--shadow-soft);
 }
 
 .book-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(45, 36, 30, 0.08);
 }
 
 .book-icon {
-    color: var(--theme-accent-grey);
-    margin-bottom: 10px;
+    background-color: var(--bg-cream); /* Icon ke peeche halka circle background */
+    color: var(--primary-orange);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 1px solid var(--orange-light);
 }
 
 .book-title {
-    font-size: 0.9rem;
+    font-family: var(--font-sans);
+    font-size: 1rem;
     font-weight: 600;
+    color: var(--text-dark);
     text-align: center;
-    margin-bottom: 15px;
-    /* Text truncate for long names */
+    margin-bottom: 20px;
+    min-height: 2.4em; /* Title alignment maintain karne ke liye */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    line-height: 1.2;
 }
 
+/* Read Now Button inside Card */
 .read-btn {
-    background: white;
-    border: 1px solid var(--theme-dark-grey);
-    padding: 5px 15px;
-    font-size: 0.8rem;
+    background: transparent;
+    border: 2px solid var(--orange-light);
+    color: var(--primary-orange);
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
     cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
 }
 
+.read-btn:hover {
+    background-color: var(--primary-orange);
+    color: var(--white);
+    border-color: var(--primary-orange);
+}
+
+/* --- 5. EMPTY STATE --- */
 .empty-msg {
+    grid-column: 1 / -1; /* Poore grid row ko cover karega */
     text-align: center;
-    
-    color: var(--theme-accent-grey);
+    padding: 60px;
+    color: var(--text-muted);
+    font-style: italic;
+    background: rgba(240, 234, 223, 0.3);
+    border-radius: 16px;
+    border: 1px dashed var(--orange-light);
 }
-/* App.css mein ye update karein */
 
+/* --- 1. FULL PAGE CONTAINER --- */
 .full-page-reader {
-    width: 100vw;
-    height: 100vh;
-    background-color: #f5f5f7; /* Halka grey background taki white pages 'pop' karein */
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-cream); /* Hamara signature cream background */
+    z-index: 5000;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Screen ke bahar scroll nahi hona chahiye */
-    position: fixed;
-    top: 0;
-    left: 0px;
-    z-index: 2000;
+    overflow: hidden;
 }
 
-/* 2. Reader Header: Jo Navbar ke gayab hone par top par dikhega */
-/* Reader Header Container */
+/* --- 2. HEADER ALIGNMENT (3-Column Grid) --- */
 .reader-header {
-    height: 70px;
+    height: 80px;
     width: 100%;
-    background-color: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2000;
-    
-    /* 3 Columns banayein: 1 part left, 2 parts center, 1 part right */
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-warm);
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr; 
+    /* Grid columns: Left placeholder, Center Title, Right Exit */
+    grid-template-columns: 1fr 2.5fr 1fr; 
     align-items: center;
-    padding: 0 20px; /* Overall side padding */
+    padding: 0 40px;
+    box-shadow: 0 2px 10px rgba(45, 36, 30, 0.03);
 }
 
-/* Heading Alignment */
 .reader-title {
-    grid-column: 2; /* Heading ko hamesha beech wale column mein rakhega */
+    grid-column: 2;
     text-align: center;
 }
 
 .reader-title h2 {
-    font-size: 1.1rem;
-    color: #333;
-    font-weight: 600;
-    margin: 0;
-    /* Badi filenames ke liye ellipsis */
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text-dark);
+    /* Long titles handle karne ke liye */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-
 .reader-exit {
-    grid-column: 3; /* Right side column */
+    grid-column: 3;
     display: flex;
-    justify-content: space-around; /* Button ko column ke right end mein dhakelega */
-    padding-right: 10px; /* "Little right side" adjustment */
+    justify-content: flex-end;
 }
 
 .close-x-btn {
-    background: transparent;
+    background-color: var(--orange-light);
+    color: var(--primary-orange);
     border: none;
-    cursor: pointer;
-    color: #555;
-    padding: 8px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    cursor: pointer;
+    transition: var(--transition);
 }
 
 .close-x-btn:hover {
-    color: #000;
-    transform: scale(1.2);
+    background-color: var(--primary-orange);
+    color: var(--white);
+    transform: rotate(90deg);
 }
+
+/* --- 3. FLIPBOOK POSITIONING --- */
 .flipbook-container {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    overflow: hidden;
-    margin-top: 90px
+    padding: 40px 20px;
+    perspective: 2000px; /* 3D effect depth */
+}
+
+/* HTMLPageFlip internal styling */
+.flip-book {
+    box-shadow: 0 20px 50px rgba(45, 36, 30, 0.15);
+    background-color: var(--white);
 }
 
 .page {
-    background: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: var(--white);
+    border: 1px solid #f0f0f0;
+    position: relative;
+    overflow: hidden;
 }
 
 .page img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: contain; /* PDF page ratio maintain karne ke liye */
 }
 
 .page-number {
     position: absolute;
-    bottom: 10px;
+    bottom: 15px;
     width: 100%;
     text-align: center;
-    font-size: 0.8rem;
-    color: #999;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
 }
 
+/* --- 4. NAVIGATION CONTROLS --- */
 .reader-controls {
-    height: 30px;
+    height: 100px;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    align-items: center;
+    gap: 30px;
     padding-bottom: 20px;
 }
 
-.reader-loading{
-    display: flex;
-    align-items:center;
-    justify-content: center;
+.reader-controls button {
+    background-color: var(--primary-orange);
+    color: var(--white);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(180, 110, 47, 0.2);
+}
 
-    height:100vh;
-    width:100vw;
-    
-    background-color: #f5f5f7;
+.reader-controls button:hover {
+    background-color: #965a25;
+    transform: translateY(-2px);
+}
+
+/* --- 5. LOADING SCREEN --- */
+.reader-loading {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-cream);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--primary-orange);
+    z-index: 6000;
+    text-align: center;
+    padding: 20px;
 }

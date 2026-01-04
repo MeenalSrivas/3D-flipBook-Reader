@@ -24,7 +24,7 @@ const NavbarWrapper = ({ session, handleLogout }) => {
         {session && (
           <>
             <button className="nav-icon-btn" onClick={handleLogout}><FiLogOut size={22}/></button>
-            <button className="nav-icon-btn"><FiUser size={24}/></button>
+            
           </>
         )}
       </div>

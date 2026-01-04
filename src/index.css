@@ -1,20 +1,25 @@
 :root {
-  --theme-white: #ffffff;
-  --theme-light-grey: #f4f4f6; /* Backgrounds */
-  --theme-mid-grey: #e0e0e5;   /* Borders */
-  --theme-dark-grey: #333336;  /* Text */
-  --theme-accent-grey: #66666e; /* Subtitles */
-
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: var(--theme-dark-grey);
-  background-color: var(--theme-white);
+  /* Colors from your screenshot */
+  --bg-cream: #FDFBF7;
+  --primary-orange: #B46E2F; /* Terracotta color from button */
+  --primary-orange-light: #E8D8C4;
+  --text-main: #2D241E;
+  --text-muted: #6D6763;
+  --card-bg: #FFFFFF;
+  --border-subtle: #F0EADF;
+  
+  /* Fonts */
+  --font-serif: 'Playfair Display', serif; /* Headings */
+  --font-sans: 'Inter', sans-serif;       /* Body */
 }
 
-body, html, #root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* Important for the scrolling effect */
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  color: var(--text-main);
 }
