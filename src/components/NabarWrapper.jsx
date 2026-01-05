@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FiPlus, FiLogOut, FiUser } from 'react-icons/fi';
+import { FiPlus, FiLogOut, FiUser, FiBookOpen } from 'react-icons/fi';
 
 const NavbarWrapper = ({ session, handleLogout }) => {
   const location = useLocation();
@@ -17,6 +17,9 @@ const NavbarWrapper = ({ session, handleLogout }) => {
       
 
       <div className="nav-logo" onClick={() => navigate('/')}>
+        <div className="nav-logo-square">
+    <FiBookOpen size={18} />
+  </div>
         <h3>NovelReader</h3>
       </div>
 
