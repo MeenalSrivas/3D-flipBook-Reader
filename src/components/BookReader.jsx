@@ -7,51 +7,13 @@ import pdfWorker from 'pdfjs-dist/build/pdf.worker.mjs?url';
 import { useNavigate } from 'react-router-dom';
 import NabarWrapper from './NabarWrapper';
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
-import { useParams } from 'react-router-dom';
 // Vite mein PDF.js worker set up karna zaroori hai
 
-const BookReader = ({ book }) => {
+const BookReader = ({ book, onBack }) => {
   const navigate = useNavigate();
   const [pages, setPages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentBook, setCurrentBook] = useState(propBook);
-  const [initialPage, setInitialPage] = useState(0);
-  const [isDataReady, setIsDataReady] = useState(false);
   const flipBookRef = useRef(null);
-
-  const fetchBookAndProgress = useCallback(async () => {
-    try {
-      let tempBook = currentBook;
-
-      // Agar page reload hua hai toh book data fetch karein
-      if (!tempBook) {
-        const { data: bookData } = await supabase
-          .from('books')
-          .select('*')
-          .eq('id', bookId)
-          .single();
-        tempBook = bookData;
-        setCurrentBook(bookData);
-      }
-
-      // Progress fetch karein
-      if (session?.user) {
-        const { data: progressData } = await supabase
-          .from('user_progress')
-          .select('current_page')
-          .eq('book_id', bookId)
-          .eq('user_id', session.user.id)
-          .single();
-
-        if (progressData) {
-          setInitialPage(progressData.current_page);
-        }
-      }
-      setIsDataReady(true);
-    } catch (err) {
-      console.error("Error fetching initial data:", err);
-    }
-  }, [book, currentBook, session]);
 
   const loadPDF = useCallback(async () => {
     if (!book) return;
