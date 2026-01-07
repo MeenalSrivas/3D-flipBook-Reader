@@ -1,4 +1,6 @@
 #3D-FlipBook-Reader
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ✨ Key Features
 Realistic 3D Flip Animation: Utilizes react-pageflip and pdf.js to simulate the tactile feel of turning physical book pages.
 
@@ -26,10 +28,25 @@ Deployment: Vercel.
 🚀 Getting Started
 Prerequisites
 Node.js (v18.0 or higher)
-
 npm or yarn
+Supabase Account (for database and storage)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+##Installation
 
-Supabase Account (for database and storage)
+Clone the repository:
+git clone https://github.com/your-username/novel-reader.git
+cd novel-reader
+
+Install dependencies:
+npm install
+
+Set up Environment Variables:
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+Run the application:
+npm run dev
+
+
