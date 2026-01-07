@@ -1,16 +1,31 @@
-# React + Vite
+#✨ Key Features
+Realistic 3D Flip Animation: Utilizes react-pageflip and pdf.js to simulate the tactile feel of turning physical book pages.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personalized Library: A clean dashboard for users to upload, store, and access their favorite novels in one place.
 
-Currently, two official plugins are available:
+Secure Authentication: Integrated Supabase Auth with Google Login for a seamless user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+High-Fidelity Rendering: Powered by pdf.js for crisp, high-quality rendering of PDF content into interactive canvases.
 
-## React Compiler
+Responsive Design: Optimized for both desktop and mobile viewing, ensuring a smooth reading experience across all devices.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+#🛠️ Tech Stack
+Frontend: React.js, Vite, React Router.
 
-## Expanding the ESLint configuration
+Backend & Database: Supabase (PostgreSQL & Storage).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+PDF Processing: PDF.js (Mozilla).
+
+Animations: React PageFlip.
+
+Icons: React Icons (Feather Icons).
+
+Deployment: Vercel.
+
+#🚀 Getting Started
+Prerequisites
+Node.js (v18.0 or higher)
+
+npm or yarn
+
+Supabase Account (for database and storage)
